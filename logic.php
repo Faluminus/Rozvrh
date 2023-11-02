@@ -22,11 +22,6 @@
             }
             return false;
         }
-        function SplitedHourStructure(){
-            $hourS1 =$this -> GenData("S1");
-            $hourS2 = $this -> GenData("S2");
-            echo "<table><tr><td>$hourS1->group U$hourS1->room</td></tr><tr><td>$hourS1->subject</td></tr><tr><td>$hourS1->teacher</td></tr></table><table><tr><td>$hourS2->group U$hourS2->room</td></tr><tr><td>$hourS2->subject</td></tr><tr><td>$hourS2->teacher</td></tr></table>";
-        }
         function ClassicHourStructure(){
             $hour = $this -> GenData("none");
             echo "<table><tr><td>U$hour->room</td></tr><tr><td>$hour->subject</td></tr><tr><td>$hour->teacher</td></table>";
@@ -37,16 +32,19 @@
             echo "<tr>";
             echo "<td>{$days[$i]}</td>";
             for($i = 0; $i <= rand(1,9) ; $i++){
-                if($this -> IsSplited() == true){
-                    echo "<td>";
-                    $this -> SplitedHourStructure();
-                    echo "</td>";
-                }
-                else{
                    echo "<td>";
-                   $this -> ClassicHourStructure();
+                   if($this -> IsSplited() == true)
+                   {
+                        for($x = 0; $x <= rand(1,2);$x++)
+                        {
+                            $this -> ClassicHourStructure();
+                        }
+                   }
+                   else
+                   {
+                        $this -> ClassicHourStructure();
+                   }
                    echo "</td>";
-                }
             }
             echo "</tr>";
         }
